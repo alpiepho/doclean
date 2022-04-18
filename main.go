@@ -67,6 +67,10 @@ func visit1(path string, d fs.DirEntry, err error) error {
 // save only files/directories not found in tree1
 func visit2(path string, d fs.DirEntry, err error) error {
 	temp2 := strings.Replace(path, treePath2, "", 1)
+	// DEBUG
+	// fmt.Println(treePath2)
+	// fmt.Println(temp2)
+	// fmt.Println("")
 	found := false
 	for _, n := range list1 {
 		temp1 := strings.Replace(n, treePath1, "", 1)
@@ -99,6 +103,10 @@ func main() {
 	}
 	treePath1 = flag.Arg(0)
 	treePath2 = flag.Arg(1)
+	// for windows
+	treePath1 = strings.Replace(treePath1, "/", "\\", -1)
+	treePath2 = strings.Replace(treePath2, "/", "\\", -1)
+
 	if len(flag.CommandLine.Args()) == 3 {
 		getKeepList(flag.Arg(2))
 	}
@@ -112,6 +120,8 @@ func main() {
 	sort.Sort(sort.Reverse(sort.StringSlice(list2)))
 	for _, n := range list2 {
 		fmt.Println("removing " + n)
+		// DEBUG
 		os.Remove(n)
 	}
+	fmt.Println(len(list2))
 }
