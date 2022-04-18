@@ -124,4 +124,5 @@ func main() {
 		os.Remove(n)
 	}
 	fmt.Println(len(list2))
+	fmt.Println("Please verify with: 'meld %s %s'", flag.Arg(0), flag.Arg(0))
 }
